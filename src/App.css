@@ -3,19 +3,18 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
-    background-color: rgb(34, 34, 34);
+    background-color: rgb(253, 226, 226);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.signup{
+/* .container{
     width: 50vw;
     max-width: 500px;
     background-color: rgb(255, 255, 255);
-    padding: 10rem;
-    border-radius: 50%;
-}
+    padding: 2rem;
+} */
 
 h1{
     font-size: 1.7rem;
@@ -43,6 +42,70 @@ input{
 }
 
 button{
-    width: 100%;
+    /* width: 100%; */
     padding: 0.5rem;
 }
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    /* padding: 0 10px; */
+    margin: 0 auto;
+    margin-top: 70px;
+    background-color: white;
+    padding: 2rem;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  tr th {
+    font-size: 18px;
+    padding: 12px 20px;
+    border: 1px solid #eeeeee;
+    text-align: left;
+    background-color: rgba(217, 221, 146, 0.2);
+  }
+  
+  tr td {
+    border: 1px solid #eeeeee;
+    text-align: left;
+    padding: 12px 20px;
+    width: fit-content;
+
+  }
+  
+  /* input {
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    width: 91%;
+    padding: 12px 12px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  input:hover {
+    background-color: #fffaf3;
+  }
+  
+  input:focus {
+    outline: 1px solid #ccc;
+    border: 1px solid #ccc;
+  } */
+  
+  .search__component{
+    margin-bottom: 2rem;
+  }
+
+  .search{
+    margin-left: 1rem;
+    width: 10rem;
+  }
