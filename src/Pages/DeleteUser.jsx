@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import StateContext from "../Context/StateContext";
 
 const DeleteUser = () => {
-  const { userData } = React.useContext(StateContext);
-
+  const { userData ,fetchUserData} = React.useContext(StateContext);
+  const navigate= useNavigate();
   const [userFound, setUserFound] = React.useState(false);
-  const [userDetail, setUserDetail] = React.useState(null); // Storing userDetail in state for later use
+  const [userDetail, setUserDetail] = React.useState(null); 
 
   const history = useNavigate();
   const { email } = useParams();
@@ -17,7 +17,7 @@ const DeleteUser = () => {
 
     if (foundUser) {
       console.log(foundUser);
-      setUserDetail(foundUser); // Set the found user to state
+      setUserDetail(foundUser); 
       setUserFound(true);
     } else {
       console.log("user not found");
@@ -26,13 +26,15 @@ const DeleteUser = () => {
   }, [email, userData]);
 
   const handleDelete = async () => {
-    if (userDetail) { // Make sure userDetail is available
+    if (userDetail) { 
       try {
         const response = await axios.delete(
-          `http://localhost:8081/v1/users/${userDetail.id}`
+          `http://localhost:8081/v1/users/deleteUser/${userDetail.email}`
         );
         console.log("Delete successful:", response.data);
-        // You can also add logic to update the UI after successful deletion if needed.
+        fetchUserData();
+        navigate("/users");
+
       } catch (error) {
         console.error("Error during delete:", error);
       }

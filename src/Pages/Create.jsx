@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Create = () => {
 
@@ -53,6 +53,7 @@ const Create = () => {
     console.log(formData);
 
     try {
+    
       const response = await fetch('http://localhost:8081/v1/users/createUser', {
         method: 'POST',
         headers: {
@@ -64,8 +65,8 @@ const Create = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Signup successful:', data);
-
-        // Display a success toast message
+        navigate("/");
+       
         toast.success('User is successfully created', {
           position: 'top-right',
           autoClose: 3000,
@@ -75,7 +76,7 @@ const Create = () => {
           draggable: true,
         });
 
-        // Clear the form after successful submission
+       
         setFormData({
           name: '',
           email: '',

@@ -91,16 +91,23 @@ export const StateProvider = ({ children }) => {
 
   const [userData, setUserData] = useState(initialData);
 
-  useEffect(() => {
+  const fetchUserData = () => {
     axios
       .get("http://localhost:8081/v1/users/fetchAllUsers")
       .then((response) => {
+        if (response.data && response.data.dateOfBirth) {
+          response.data.dateOfBirth = new Date(response.data.dateOfBirth);
+        }
         setUserData(response.data);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, []);
 
   // useEffect(() => {
@@ -131,6 +138,7 @@ export const StateProvider = ({ children }) => {
     setToUpdate,
     userData,
     setUserData,
+    fetchUserData,
   };
 
   return (
