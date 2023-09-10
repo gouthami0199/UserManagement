@@ -1,59 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import StateContext from '../Context/StateContext';
 
-const initialData = [
-  
-  {
-    name: 'John Doe',
-    email: 'johndoe@email.com',
-    dateofbirth: '20-08-1987',
-    gender: 'male',
-    phone: '8753948579',
-  },
-  {
-    name: 'Jane Smith',
-    email: 'janesmith@email.com',
-    dateofbirth: '15-04-1990',
-    gender: 'female',
-    phone: '7894561230',
-  },
-];
 
 const FetchAllUsers = () => {
-  const [userData, setUserData] = useState(initialData); 
+  const { initialData,userData,setUserData } = React.useContext(StateContext);
   const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    axios.get('http://localhost:8081/v1/users/fetchAllUsers')
-      .then(response => {
-        setUserData(response.data); 
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
+  
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const DeleteUser = async (email) => {
-    try {
-      
-      await axios.delete(`http://localhost:8081/v1/users/${email}`);
-
-      setUserData((prevUserData) =>
-        prevUserData.filter((user) => user.email !== email)
-      );
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
-
+  const filteredData = userData.filter(user => {
+    return Object.values(user).some(value => 
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
-    <div className="signup">
-      <div className="container">
+ 
+      <div className="fetch__container">
         <h1 className="title">All Users</h1>
         <div className="search__component">
           {/* Search: */}
@@ -64,7 +30,15 @@ const FetchAllUsers = () => {
             onChange={handleSearchChange}
             placeholder="Search"
           />
+          <div>
+            <Link to="/">
+              <button className="navs">Home</button>
+            </Link>
+          
+
+          </div>
           {/* <button style={{ width: 'fitContent'}}>Search</button> */}
+
         </div>
 
         <table>
@@ -75,32 +49,45 @@ const FetchAllUsers = () => {
               <th>Gender</th>
               <th>Mobile</th>
               <th>DOB</th>
-              <th>Update</th>
+              <th
+              
+              >
+                Update
+                </th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {userData.map(({ phone, name, email, dateofbirth, gender }) => (
+            {filteredData.map(({ id,mobileNumber, name, email, dateOfBirth, gender }) => (
               <tr key={email}>
                 <td>{name}</td>
                 <td>{email}</td>
                 <td>{gender}</td>
-                <td>{phone}</td>
-                <td>{dateofbirth}</td>
+                <td>{mobileNumber}</td>
+                <td>{dateOfBirth}</td>
                 <td>
-                  <button onClick={()=>{
-                    // UpdateUser(id);
-                  }}>Update</button>
+                <Link to={`/update/${email}`}>
+                  <button >Update</button></Link>
                 </td>
                 <td>
-                <button onClick={() => DeleteUser(email)}>Delete</button>
+                <button 
+             
+                >
+                  <Link
+                
+                to={`/delete/${email}`}
+      >
+      
+                  Delete
+                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </div>
+    
   );
 };
 

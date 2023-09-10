@@ -3,11 +3,41 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
-    background-color: rgb(253, 226, 226);
+    /* background-color: rgb(34, 34, 34); */
+
+    background-image: url('https://static.pexels.com/photos/414171/pexels-photo-414171.jpeg');
+  background-size:cover;
+        -webkit-animation: slidein 120s;
+        animation: slidein 120s;
+
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+
+        -webkit-animation-direction: alternate;
+        animation-direction: alternate;     
+    
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
+@-webkit-keyframes slidein {
+from {background-position: top; background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+}
+
+@keyframes slidein {
+from {background-position: top;background-size:3000px; }
+to {background-position: -100px 0px;background-size:2750px;}
+
+}
+
+
+
 
 /* .container{
     width: 50vw;
@@ -47,12 +77,21 @@ button{
 }
 
 .container {
-    width: 100%;
-    max-width: 1000px;
+    width: 30vw;
+    max-width: 1000px !important;
     /* padding: 0 10px; */
     margin: 0 auto;
     margin-top: 70px;
-    background-color: white;
+    background-color: white !important;
+    padding: 2rem;
+  }
+.fetch__container {
+    width: 100%;
+    max-width: 1000px !important;
+    /* padding: 0 10px; */
+    margin: 0 auto;
+    margin-top: 70px;
+    background-color: white !important;
     padding: 2rem;
   }
   
@@ -103,9 +142,64 @@ button{
   
   .search__component{
     margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
   }
 
   .search{
     margin-left: 1rem;
     width: 10rem;
+  }
+
+  .button-group{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .db{
+    padding: 0.8rem 4rem;
+  }
+
+  .dbb{
+    width: 50%;
+  }
+
+  .navs{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .inputdelete{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .components{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav__buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 15rem;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+  }
+
+  .ds{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
   }
